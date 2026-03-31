@@ -11,7 +11,7 @@
 
     <!-- Package metadata -->
     <PackageId>Philiprehberger.GlobMatcher</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Philip Rehberger</Authors>
     <Description>Match file paths against glob patterns — supports *, **, ?, character classes, brace expansion, and negation.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
