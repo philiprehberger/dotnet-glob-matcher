@@ -87,6 +87,18 @@ public static class Glob
         return Match(pattern, paths, options);
     }
 
+    /// <summary>
+    /// Pre-compiles a glob pattern for efficient reuse across multiple match operations.
+    /// The pattern is parsed once and the result can be used repeatedly without re-parsing.
+    /// </summary>
+    /// <param name="pattern">The glob pattern to compile.</param>
+    /// <param name="options">Options controlling match behavior. If <c>null</c>, default options are used.</param>
+    /// <returns>A <see cref="CompiledGlob"/> instance that can be reused for matching.</returns>
+    public static CompiledGlob Compile(string pattern, GlobOptions? options = null)
+    {
+        return new CompiledGlob(pattern, options ?? new GlobOptions());
+    }
+
     private static bool IsMatchInternal(string pattern, string path, bool caseSensitive)
     {
         var segments = GlobParser.Parse(pattern);

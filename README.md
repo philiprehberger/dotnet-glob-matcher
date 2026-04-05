@@ -47,6 +47,30 @@ var filtered = Glob.Filter("*.cs", files);
 // ["app.cs", "lib.cs"]  (alias for Match)
 ```
 
+### Compiled Patterns
+
+Pre-compile a pattern for efficient reuse across multiple match operations:
+
+```csharp
+using Philiprehberger.GlobMatcher;
+
+var compiled = Glob.Compile("src/**/*.cs");
+
+compiled.IsMatch("src/Models/User.cs"); // true
+compiled.IsMatch("test/foo.cs");        // false
+
+var files = new[] { "src/App.cs", "src/readme.md", "src/Lib.cs" };
+var csFiles = compiled.Filter(files);
+// ["src/App.cs", "src/Lib.cs"]
+```
+
+With options:
+
+```csharp
+var compiled = Glob.Compile("*.CS", new GlobOptions(CaseSensitive: false));
+compiled.IsMatch("App.cs"); // true
+```
+
 ### Negation Patterns
 
 ```csharp
@@ -66,6 +90,15 @@ Glob.IsMatch("!*.log", "error.log"); // false
 | `IsMatch(string pattern, string path, GlobOptions options)` | Test with custom options |
 | `Match(string pattern, IEnumerable<string> paths)` | Return all matching paths |
 | `Filter(string pattern, IEnumerable<string> paths)` | Alias for `Match` |
+| `Compile(string pattern, GlobOptions? options)` | Pre-compile a pattern for reuse |
+
+### `CompiledGlob`
+
+| Method | Description |
+|--------|-------------|
+| `IsMatch(string path)` | Test if a path matches the compiled pattern |
+| `Filter(IEnumerable<string> paths)` | Return all matching paths |
+| `Pattern` | The original pattern string |
 
 ### `GlobOptions`
 

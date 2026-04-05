@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2026-04-05)
+
+- Add `Glob.Compile()` static method for pre-compiled pattern reuse
+- Add `CompiledGlob` class with `IsMatch(path)` and `Filter(paths)` methods
+- Pattern is parsed once and reused across multiple match operations
+
 ## 0.1.1 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section
